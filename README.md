@@ -1,5 +1,7 @@
 # ChallengeRegistrationItems
 
+Demo: https://challenge-registration-items.herokuapp.com
+
 ## Ambiente de desenvolvimento
 
 Após clonar o projeto:
