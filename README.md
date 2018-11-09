@@ -12,3 +12,4 @@ Após clonar o projeto:
 - [Angular](https://angular.io)
 - [TypeScript](https://www.typescriptlang.org/)
 - [Primeng](https://www.primefaces.org/primeng/#/)
+- [Momentjs](https://momentjs.com/)
