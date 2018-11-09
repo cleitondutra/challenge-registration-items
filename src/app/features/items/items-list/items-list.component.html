@@ -1,0 +1,61 @@
+<p-fieldset id="fs-list-itens" legend="Lista">
+  <button
+    pButton
+    type="button"
+    label="Novo"
+    class="ui-button-raised ui-button-primary m-b"
+    (click)="novo()"
+  ></button>
+  <p-table [value]="listItems">
+    <ng-template pTemplate="header">
+      <tr>
+        <th width="30%">Item</th>
+        <th>Unidade</th>
+        <th>Qt</th>
+        <th>Preço</th>
+        <th>Perecível</th>
+        <th>Validade</th>
+        <th>Fabricação</th>
+        <th>Ação</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-item>
+      <tr>
+        <td style="white-space: nowrap">{{ item.nomeItem }}</td>
+        <td>{{ item.unidadeMedida?.name }}</td>
+        <td>{{ item.quantidade }}</td>
+        <td>{{ getCurrency(item.preco) }}</td>
+        <td>{{ getConvertBoolean(item.perecivel) }}</td>
+        <td>{{ getDateBr(item.dataValidade) }}</td>
+        <td>{{ getDateBr(item.dataFabricacao) }}</td>
+        <td class="aling-center">
+          <button
+            pButton
+            type="button"
+            icon="pi pi-pencil"
+            class="m-right ui-button-severity  ui-button-info m-r"
+            (click)="editarItem(item)"
+          ></button>
+          <button
+            pButton
+            type="button"
+            icon="pi pi-trash"
+            class="m-right ui-button-severity ui-button-danger"
+            (click)="removerItem(item)"
+          ></button>
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="summary">
+      Quantidade de registro(s) {{ listItems?.length }}
+    </ng-template>
+  </p-table>
+</p-fieldset>
+
+<p-confirmDialog
+  header="Confirmation"
+  icon="pi pi-exclamation-triangle"
+  width="425"
+></p-confirmDialog>
+
+<p-growl [(value)]="msgGrowl"></p-growl>

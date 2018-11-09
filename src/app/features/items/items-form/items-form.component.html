@@ -1,0 +1,141 @@
+<form [formGroup]="itemsFormGroup">
+  <p-fieldset id="fs-form-itens" legend="Fomulário">
+    <div class="ui-g ui-fluid">
+      <div class="ui-sm-12 ui-md-12 ui-lg-12 ui-xl-12">
+        <label id="lb-nome-item" for="ff-nome-item">Nome do item</label>
+        <input
+          id="ff-nome-item"
+          type="text"
+          pInputText
+          name="nomeItem"
+          formControlName="nomeItem"
+          [maxlength]="50"
+        />
+        <div *ngIf="hasEror('nomeItem')">
+          <p-message severity="error" text="Campo obrigatório"></p-message>
+        </div>
+      </div>
+      <div class="ui-sm-12 ui-md-6 ui-lg-3 ui-xl-3">
+        <label id="lb-unidade-medida" for="ff-unidade-medida"
+          >Unidade de medida</label
+        >
+        <p-dropdown
+          id="ff-unidade-medida"
+          [style]="{ width: '100%' }"
+          [options]="unidadeMedida"
+          formControlName="unidadeMedida"
+          [(ngModel)]="selectedUnidadeMedida"
+          placeholder="Selecione uma opção"
+          optionLabel="name"
+          [showClear]="true"
+          (onChange)="changeUnidadeMedida($event?.value?.code)"
+        ></p-dropdown>
+        <div *ngIf="hasEror('unidadeMedida')">
+          <p-message severity="error" text="Campo obrigatório"></p-message>
+        </div>
+      </div>
+      <div class="ui-sm-12 ui-md-6 ui-lg-3 ui-xl-3">
+        <label id="lb-quantidade" for="ff-quantidade">Quantidade</label>
+        <div class="ui-inputgroup">
+          <input
+            id="ff-quantidade"
+            type="text"
+            pInputText
+            [pKeyFilter]="somenteNumeroRegex"
+            [maxlength]="quantidadeMaxLength"
+            formControlName="quantidade"
+            name="quantidade"
+            (blur)="validaQuantidadeBlur()"
+          />
+          <span class="ui-inputgroup-addon">{{ addon }}</span>
+        </div>
+        <div *ngIf="hasEror('quantidade')">
+          <p-message severity="error" text="Campo obrigatório"></p-message>
+        </div>
+      </div>
+      <div class="ui-sm-12 ui-md-6 ui-lg-3 ui-xl-3">
+        <label id="lb-preco" for="ff-preco">Preço</label>
+        <input
+          id="ff-preco"
+          pInputText
+          formControlName="preco"
+          name="preco"
+          currencyMask
+          [options]="{
+            prefix: 'R$ ',
+            thousands: '.',
+            decimal: ',',
+            align: 'left'
+          }"
+        />
+        <div *ngIf="hasEror('preco')">
+          <p-message severity="error" text="Campo obrigatório"></p-message>
+        </div>
+      </div>
+      <div class="ui-sm-12 ui-md-6 ui-lg-3 ui-xl-3">
+        <div class="p-t-c">
+          <p-checkbox
+            id="ff-perecivel"
+            label="Produto perecível"
+            name="perecivel"
+            formControlName="perecivel"
+            binary="true"
+            (onChange)="isRequiredDataValidade()"
+            [formControl]="itemsFormGroup.controls['perecivel']"
+          ></p-checkbox>
+        </div>
+      </div>
+      <div class="ui-sm-12 ui-md-6 ui-lg-3 ui-xl-3">
+        <label id="lb-data-validade" for="ff-data-validade"
+          >Data de validade</label
+        >
+        <p-calendar
+          id="ff-data-validade"
+          name="dataValidade"
+          formControlName="dataValidade"
+          [showIcon]="true"
+          dateFormat="dd/mm/yy"
+          [locale]="pt"
+          (onSelect)="isItemVencido()"
+        ></p-calendar>
+        <div *ngIf="hasEror('dataValidade')">
+          <p-message severity="error" text="Campo obrigatório"></p-message>
+        </div>
+      </div>
+      <div class="ui-sm-12 ui-md-6 ui-lg-3 ui-xl-3">
+        <label id="lb-data-fabricacao" for="ff-data-fabricacao"
+          >Data de fabricação</label
+        >
+        <p-calendar
+          id="ff-data-fabricacao"
+          name="dataFabricacao"
+          formControlName="dataFabricacao"
+          [showIcon]="true"
+          dateFormat="dd/mm/yy"
+          [locale]="pt"
+        ></p-calendar>
+        <div *ngIf="hasEror('dataFabricacao')">
+          <p-message severity="error" text="Campo obrigatório"></p-message>
+        </div>
+      </div>
+    </div>
+  </p-fieldset>
+  <p-messages [(value)]="msgItemVencido"></p-messages>
+  <div class="p-t">
+    <button
+      pButton
+      type="button"
+      label="Salvar"
+      class="m-r ui-button-raised ui-button-success"
+      (click)="save()"
+    ></button>
+    <button
+      pButton
+      type="button"
+      label="Cancelar"
+      class="ui-button-raised ui-button-secondary"
+      (click)="cancel()"
+    ></button>
+  </div>
+</form>
+<p-growl [(value)]="msgGrowl"></p-growl>

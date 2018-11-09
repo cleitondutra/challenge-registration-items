@@ -1,0 +1,45 @@
+.ui-menu {
+  height: -webkit-fill-available;
+  float: left;
+}
+
+.home {
+  margin-left: 200px;
+}
+
+.m-r {
+  margin-right: 0.5em !important;
+}
+
+.p-t {
+  padding-top: 0.5em !important;
+}
+
+.p-t-c {
+  padding-top: 1.6em !important;
+}
+
+.p-b {
+  padding-bottom: 0.5em !important;
+}
+
+.m-b {
+  margin-bottom: 0.5em !important;
+}
+
+td {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.aling-center {
+  text-align: center !important;
+}
+
+.bx-c {
+  padding: 20px;
+  border: 1px solid #eee;
+  border-left-width: 5px;
+  border-radius: 3px;
+  border-left-color: #5bc0de;
+}

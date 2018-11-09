@@ -1,0 +1,24 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "baseUrl": "./",
+    "outDir": "./dist/out-tsc",
+    "sourceMap": true,
+    "declaration": false,
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "noUnusedLocals": true,
+    "target": "es5",
+    "typeRoots": ["node_modules/@types"],
+    "lib": ["es2017", "dom"],
+    "paths": {
+      "@registration-items-components": ["src/app/components/index.ts"],
+      "@registration-items-components/*": ["src/app/components/*"],
+      "@registration-items-features": ["src/app/features/index.ts"],
+      "@registration-items-features/*": ["src/app/features/*"],
+      "@registration-items-shared": ["src/app/shared/index.ts"],
+      "@registration-items-shared/*": ["src/app/shared/*"]
+    }
+  }
+}
